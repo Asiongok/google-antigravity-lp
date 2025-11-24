@@ -3,93 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Antigravityとは？</title>
+    <title>Google Antigravity - デジタルの重力を体験せよ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* === ベーススタイル === */
+        :root {
+            --bg-color: #0a0a0a; /* 深い黒 */
+            --text-color: #e0e0e0;
+            --accent-blue: #4285F4;
+            --accent-red: #EA4335;
+            --accent-yellow: #FBBC05;
+            --accent-green: #34A853;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
             margin: 0;
-            padding: 0;
-            color: #202124;
-            background-color: #fff;
+            font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            overflow-x: hidden;
         }
-        header {
-            padding: 20px;
-            border-bottom: 1px solid #dadce0;
+
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: 0.05em;
         }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #5f6368;
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
+
+        /* === アニメーション用の共通クラス === */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === ヒーローセクション（トップ） === */
         .hero {
-            padding: 100px 20px;
-            background: linear-gradient(180deg, #fff 0%, #f1f3f4 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        h1 {
+
+        /* 背景の浮遊する円 */
+        .floating-shapes div {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: float 15s infinite linear;
+            z-index: -1;
+        }
+        .shape1 { width: 100px; height: 100px; background: var(--accent-blue); top: 10%; left: 10%; animation-delay: 0s; }
+        .shape2 { width: 150px; height: 150px; background: var(--accent-red); top: 60%; right: 15%; animation-delay: -5s; }
+        .shape3 { width: 80px; height: 80px; background: var(--accent-green); bottom: 20%; left: 30%; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-red), var(--accent-yellow), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        /* === コンテンツセクション === */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-blue);
+        }
+
+        .feature-icon {
             font-size: 3rem;
             margin-bottom: 20px;
+            display: block;
         }
-        h1 span:nth-child(1) { color: #4285F4; }
-        h1 span:nth-child(2) { color: #EA4335; }
-        h1 span:nth-child(3) { color: #FBBC05; }
-        h1 span:nth-child(4) { color: #4285F4; }
-        h1 span:nth-child(5) { color: #34A853; }
-        h1 span:nth-child(6) { color: #EA4335; }
-        
-        .description {
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-            font-size: 1.1rem;
-            color: #4d5156;
+
+        /* === CTAセクション（最後のボタン） === */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-color) 0%, #1a1a1a 100%);
         }
-        .btn {
+
+        .btn-neon {
             display: inline-block;
-            margin-top: 30px;
-            padding: 12px 24px;
-            background-color: #f8f9fa;
-            border: 1px solid #f8f9fa;
-            border-radius: 4px;
-            color: #3c4043;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            border: 2px solid var(--accent-blue);
+            border-radius: 50px;
             text-decoration: none;
-            font-size: 14px;
-            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(66, 133, 244, 0.2);
+            position: relative;
+            overflow: hidden;
         }
-        .btn:hover {
-            box-shadow: 0 1px 2px rgba(60,64,67,0.3);
-            border-color: #dadce0;
+
+        .btn-neon:hover {
+            background-color: var(--accent-blue);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(66, 133, 244, 0.6);
         }
+
+        /* === フッター === */
         footer {
-            margin-top: 50px;
-            padding: 20px;
+            text-align: center;
+            padding: 30px;
             font-size: 0.8rem;
-            color: #70757a;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">Easter Egg Museum</div>
-    </header>
+    <div class="hero">
+        <div class="floating-shapes">
+            <div class="shape1"></div>
+            <div class="shape2"></div>
+            <div class="shape3"></div>
+        </div>
+        <div class="container fade-up">
+            <h1 class="hero-title">Google Antigravity</h1>
+            <p class="hero-subtitle">インターネットの常識が崩れる瞬間。<br>いつもの検索画面が、物理法則に支配されたデジタルな遊び場へ。</p>
+        </div>
+        <div style="position: absolute; bottom: 30px; animation: bounce 2s infinite;">↓</div>
+    </div>
 
-    <section class="hero">
-        <h1>
-            <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span> Antigravity
-        </h1>
-        <p class="description">
-            Google Antigravity（重力）は、2009年にMr.doobによって作成された有名なイースターエッグ（隠し機能）です。<br><br>
-            検索画面のすべての要素が重力に従って崩れ落ち、マウスで掴んで投げ飛ばすことができる、物理演算を用いた遊び心あふれるプロジェクトです。
-        </p>
-        <a href="https://mrdoob.com/projects/chromeexperiments/google-gravity/" target="_blank" class="btn">
-            I'm Feeling Lucky (実際に試す)
-        </a>
+    <section class="container">
+        <h2 class="section-title fade-up">What is Antigravity?</h2>
+        <div class="feature-grid">
+            <div class="feature-card fade-up">
+                <span class="feature-icon">💥</span>
+                <h3>秩序から混沌へ</h3>
+                <p>ページを開いた瞬間、見慣れたロゴや検索バーが重力に引かれて落下します。整然と並んでいたウェブの秩序が、一瞬にして崩れ落ちる爽快感を体験してください。</p>
+            </div>
+            <div class="feature-card fade-up" style="transition-delay: 0.2s;">
+                <span class="feature-icon">🎮</span>
+                <h3>触って、投げて、遊ぶ</h3>
+                <p>崩れ落ちた要素は、マウスで掴んで投げ飛ばすことができます。ウェブサイトがただ「見る」ものから、物理演算された「触って遊ぶおもちゃ」に変わるのです。</p>
+            </div>
+            <div class="feature-card fade-up" style="transition-delay: 0.4s;">
+                <span class="feature-icon">🎨</span>
+                <h3>デジタルアートの金字塔</h3>
+                <p>これはGoogleの公式機能ではなく、Mr.doob氏によって作られた有名なウェブ実験アートです。ブラウザの可能性を広げた歴史的な作品の一つです。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container fade-up">
+            <h2 style="margin-bottom: 30px;">重力崩壊を体験しよう</h2>
+            <p style="margin-bottom: 50px;">準備はいいですか？下のボタンを押すと、<br>あなたが知っているGoogleの画面は過去のものになります。</p>
+            <a href="https://mrdoob.com/projects/chromeexperiments/google-gravity/" target="_blank" class="btn-neon">
+                I'm Feeling Lucky <span style="font-size:0.8em;">(実際のサイトへ)</span>
+            </a>
+        </div>
     </section>
 
     <footer>
-        <p>© 2025 Unofficial Fan Page based on Mr.doob's work.</p>
+        <p>※これはファンによる非公式の紹介ページです。Google AntigravityはMr.doob氏による作品です。</p>
+        <p>© 2025 Unofficial Fan Page.</p>
     </footer>
+
+
+    <script>
+        // 画面に要素が入ってきたら 'visible' クラスをつける仕掛け
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 }); // 要素が10%見えたら発動
+
+        // 監視対象の要素（fade-upクラスがついているもの全て）
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 
 </body>
 </html>
